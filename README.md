@@ -28,5 +28,5 @@
 
 ### 效果如图
 
-![show.jpg](.\show.jpg)
+![show.jpg](show.jpg)
 

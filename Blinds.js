@@ -12,7 +12,7 @@
 	             'images/2.jpg',
 	             'images/3.jpg',
 	             'images/4.jpg',
-	             'images/5.jpg',
+	             'images/5.jpg'
 	         ],
 	     minWid: 100,						收缩的最小宽度（选填，默认值100）
 	============================================================================
@@ -24,25 +24,24 @@
  */
  (function(window,document) {
 	 function Blinds(options) {
-	     this.default = {
-	         wrapId: 'wrapper',
-	         imgurl: [
+	     this.defaultdata = {
+	         'wrapId': 'wrapper',
+	         'imgurl': [
 	             'images/1.jpg',
 	             'images/2.jpg',
 	             'images/3.jpg',
 	             'images/4.jpg',
-	             'images/5.jpg',
+	             'images/5.jpg'
 	         ],
-	         minWid: 100,
+	         'minWid': 100
 	     };
 	     this.init(options);
-	 };
+	 }
 
 	 Blinds.prototype = {
 	     constructor: Blinds,
 	     init: function(options) {											//**初始化**
-	         var _this = this;
-	         var _default = this.default;
+	         var _default = this.defaultdata;
 	         this.extend(_default, options); 								//参数合并处理
 
 	         this.wrapper = document.getElementById(_default.wrapId);		//获取盒子，设置属性
@@ -58,32 +57,30 @@
 	             li.style.backgroundImage = 'url(' + _default.imgurl[i] + ')';
 	             li.style.position = 'absolute';
 	             this.wrapUl.appendChild(li);
-	         };
+	         }
 	         this.liList = this.wrapper.getElementsByTagName('li');
 	         this.defaultWid = this.liList[0].offsetWidth / this.liList.length;	//获取设置没一个li默认展示宽度
 	         for (var i = 0; i < this.liList.length; i++) {
 	             this.liList[i].style.left = i * this.defaultWid + 'px';
-	         };
+	         }
 	         this.bind();
 	     },
 	     bind: function() {														//**绑定事件**
 	         var _this = this;
 	         for (var i = 0; i < this.liList.length; i++) {						//绑定鼠标移入事件
-	             this.liList[i].addEventListener('mouseover', (function(index) {
-	                 return function() {
-	                     _this.render(index);
-	                 }
-	             })(i));
+	         	 this.liList[i].index = i;
+	             this.liList[i].onmouseover = function() {
+	                  _this.render(this.index);
+	             };
 
-	             this.liList[i].addEventListener('mouseout', function() {		//绑定鼠标移出事件
+	             this.liList[i].onmouseout = function() {					//绑定鼠标移出事件
 	                 _this.render(-1);
-	             })
-	         };
+	             }
+	         }
 	     },
 	     render: function(index) {												//**渲染**
-	         var _this = this;
 	         var num = this.liList.length;
-	         var minWid = this.default.minWid;
+	         var minWid = this.defaultdata.minWid;
 	         var toWid = this.liList[0].offsetWidth;							//li总宽度
 
 	         if (index === -1) {												//-1表示鼠标移出，回到默认状态
@@ -91,9 +88,9 @@
 	                 this.animate(this.liList[i], {
 	                     "left": i * this.defaultWid
 	                 });
-	             };
+	             }
 	             return false;
-	         };
+	         }
 
 	         for (var i = 0; i < this.liList.length; i++) {						//按鼠标经过的index，计算设置每一距离
 	             if (i <= index) {
@@ -105,7 +102,7 @@
 	                     "left": i * minWid + (toWid - minWid * num)
 	                 });
 	             }
-	         };
+	         }
 	     },
 	     animate: function(element, obj, fn) {									//**运动函数**
 	         var _this = this;
@@ -148,4 +145,4 @@
 	 };
 
 	 window.Blinds = Blinds;													//**沙箱暴露**
-})(window,document)
+})(window,document);
