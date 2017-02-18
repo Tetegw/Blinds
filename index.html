@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+    * {
+        margin: 0;
+        padding: 0;
+    }
+
+    ul {
+        list-style: none;
+    }
+
+    #box,
+    #wrap {
+        width: 1200px;
+        height: 400px;
+        border: 2px solid red;
+        margin: 100px auto;
+    }
+
+    #wrapper {
+        width: 500px;
+        height: 200px;
+        border: 2px solid red;
+        margin: 100px auto;
+    }
+    </style>
+</head>
+
+<body>
+    <div id="box"></div>
+    <div id="wrapper"></div>
+    <div id="wrap"></div>
+    <script src="Blinds.js"></script>
+    <script>
+    window.onload = function() {
+        var Blinds1 = new Blinds({
+            wrapId: 'box',
+        });
+        var Blinds2 = new Blinds({
+            wrapId: 'wrapper',
+            minWid: 50,
+            imgurl: [
+                'images/3.jpg',
+                'images/1.jpg',
+                'images/5.jpg',
+                'images/2.jpg',
+                'images/4.jpg',
+            ],
+        });
+        var Blinds3 = new Blinds({
+            wrapId: 'wrap',
+            imgurl: [
+                'images/1.jpg',
+                'images/2.jpg',
+                'images/3.jpg',
+                'images/4.jpg',
+                'images/5.jpg',
+                'images/4.jpg',
+                'images/5.jpg',
+            ],
+        });
+    }
+    </script>
+</body>
+
+</html>
